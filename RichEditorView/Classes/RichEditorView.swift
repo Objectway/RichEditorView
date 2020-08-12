@@ -539,6 +539,11 @@ import UIKit
         if !webView.containsFirstResponder {
             let point = tapRecognizer.location(in: webView)
             focus(at: point)
+            
+            // fix for RAT-1045 => https://github.com/cjwirth/RichEditorView/issues/229
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.5) {
+                self.focus(at: point)
+            }
         }
     }
 
